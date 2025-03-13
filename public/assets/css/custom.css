@@ -1,0 +1,41 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #357679;
+    padding-top: 20px;
+    /* position: fixed; */
+}
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+    display: block;
+}
+.sidebar a:hover {
+    background: #385455;
+}
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* custom colors */
+.bg-teal{
+    background: #043e4a;
+}
+.bg-teal-light{
+    background-color: #295d66;
+}
+.bg-light-transparent{
+    background-color: #fff5;
+}
+.avatar {
+    height:30px;
+    width:30px;
+    background-color: white;
+    border-radius:50%;  
+}
+.create-task-form::placeholder{
+    color: white;
+}

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Task\App\Http\Controllers\TaskController;
+use Modules\Task\App\Livewire\Index;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,8 @@ use Modules\Task\App\Http\Controllers\TaskController;
 
 Route::group([], function () {
     Route::resource('task', TaskController::class)->names('task');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('myday', Index::class)->name('myday.index');
 });
