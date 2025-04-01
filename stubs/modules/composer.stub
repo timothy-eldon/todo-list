@@ -18,6 +18,7 @@
     "autoload": {
         "psr-4": {
             "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\App\\": "$APP_FOLDER_NAME$",
+            "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\App\\Livewire\\": "$APP_FOLDER_NAME$/Livewire",
             "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\Database\\Factories\\": "database/factories/",
             "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\Database\\Seeders\\": "database/seeders/"
         }

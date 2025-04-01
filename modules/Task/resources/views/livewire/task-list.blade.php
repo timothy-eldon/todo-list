@@ -10,17 +10,17 @@
                     <div>
                         <div class="avatar"></div>
                     </div>
-        
-        
+
+
                     <div class="text-white">
                         <div class="d-flex gap-2 mb-2">
                             <i class="fa-solid fa-lock"></i>
                             <h4>my list>personal</h4>
                         </div>
-                        <h3 class="fw-bold fs-4">{{ $task->title }}</h3>    
+                        <h3 class="fw-bold fs-4">{{ $task->title }}</h3>
                     </div>
-    
-    
+
+
                 </div>
                 <div class="d-flex gap-2">
                     <button wire:click="$dispatch('loadTask', {taskId: {{ $task->id }}})"  class="text-white">
@@ -46,7 +46,7 @@
             <form wire:submit.prevent="createTask" class="d-flex">
                 <button class="btn p-0 fs-4">
                     <i class="fa-solid fa-square-plus text-white"></i>
-                </button> 
+                </button>
                 <input wire:model="title" type="text" placeholder="Add task" class="create-task-form bg-transparent w-100 ">
             </form>
         </div>
