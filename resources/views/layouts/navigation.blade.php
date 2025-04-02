@@ -18,8 +18,8 @@
                 </div>
             </div>
 
-            {{-- <!-- Task search-bar -- --}}
-            <x-task::search-bar />
+            {{-- <!-- Task search-bar -- 
+            <livewire:task::task-search-bar />--}}
 
             {{-- <!-- Settings Dropdown -- --}}
             <div class="hidden sm:flex sm:items-center sm:ms-6">

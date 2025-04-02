@@ -12,43 +12,37 @@ class TaskSearch extends Component
 
     public $search = '';
     public $tasks = [];
-    public $showSearchModal = false;
 
-    public function openModal()
-    {
-        $this->showSearchModal = true;
-        $this->fetchAuthTasks(); // Load tasks immediately when opening modal
-    }
+    public $display_search;
 
-    // Hide the search modal
-    public function closeModal()
-    {
-        $this->showSearchModal = false;
-        $this->search = ''; // Clear search input
-        $this->tasks = []; // Clear search results
-    }
+    protected $listeners = [
+        'toggleSearch' => 'updateSearchDisplay',
+        'searchUpdated' => 'fetchAuthTasks'
+    ];
+
+    public function fetchAuthTasks($searchTerm){
+        $this->search = $searchTerm; // Update search term
 
 
-    public function fetchAuthTasks()
-    {
         if (Auth::check()) {
-            $query = Task::where('user_id', Auth::id());
-
-            if (!empty($this->search)) {
-                $query->where(function ($q) {
-                    $q->where('title', 'like', "%{$this->search}%")
-                      ->orWhere('description', 'like', "%{$this->search}%");
-                });
-            }
-
-            $this->tasks = $query->get();
+            $this->tasks = Task::where('user_id', Auth::id())
+                ->where(function ($query) {
+                    $query->where('title', 'like', "%{$this->search}%")
+                          ->orWhere('description', 'like', "%{$this->search}%");
+                })
+                ->get();
         } else {
             $this->tasks = [];
         }
     }
 
+    public function updateSearchDisplay($display_search)
+    {
+        $this->display_search = $display_search;
+    }
+
     public function render()
     {
-        return view('task::livewire.task-search', ['tasks'=> $this->tasks]);
+        return view('task::livewire.task-search', ['tasks' => $this->tasks]);
     }
 }
