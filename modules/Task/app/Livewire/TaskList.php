@@ -13,9 +13,19 @@ class TaskList extends Component
     public $tasks;
     public $title;
     public $description;
+    public $display_search;
+
 
     // livewire events
-    protected $listeners = ['taskUpdated' => 'refresh'];
+    protected $listeners = [
+        'toggleSearch' => 'updateSearchDisplay',
+        'taskUpdated' => 'refresh',
+    ];
+
+    public function updateSearchDisplay($display_search)
+    {
+        $this->display_search = $display_search;
+    }
 
     public function mount(){
         $this->tasks = Auth::user()->tasks ?? [];
