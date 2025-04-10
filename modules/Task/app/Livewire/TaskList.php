@@ -21,6 +21,11 @@ class TaskList extends Component
         $this->tasks = Auth::user()->tasks ?? [];
     }
 
+    public function render()
+    {
+        return view('task::livewire.task-list');
+    }
+
     public function createTask(){
 
         if(!Auth::check()){
@@ -59,9 +64,5 @@ class TaskList extends Component
     public function refresh(){
         $this->tasks = Auth::user()->tasks()->get();
     }
-
-    public function render()
-    {
-        return view('task::livewire.task-list');
-    }
 }
+ 

@@ -15,7 +15,7 @@ class ListManagement extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['user_id', 'name'];
+    protected $fillable = ['user_id', 'title'];
     protected $table = 'lists';
 
     // Relationship with User
@@ -27,7 +27,7 @@ class ListManagement extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class, 'id');
     }
 
 

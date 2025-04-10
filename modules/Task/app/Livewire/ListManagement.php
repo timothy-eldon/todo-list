@@ -9,26 +9,41 @@ use Modules\Task\App\Models\ListManagement as ModelsListManagement;
 
 class ListManagement extends Component
 {
-    public $editingListName; 
-    public $editingListId;  
-    public $lists;           
-    public $name;            
+    public $editingListName;
+    public $editingListId;
+    public $lists = [];
+    public $name;
+
+    protected $listeners = [
+        'refresh_list' => 'fetchLists'
+    ];
+
+    public function mount()
+    {
+        $this->fetchLists();
+    }
 
     public function render()
     {
         return view('task::livewire.list-management');
     }
 
-    
-    public function mount()
-    {
-        $this->fetchLists();
-    }
-
     // Fetch lists
     public function fetchLists()
     {
-        $this->lists = ModelsListManagement::where('user_id', Auth::id())->get();
+        $list = ModelsListManagement::where('user_id', Auth::id())->get();
+        $lists_array = [];
+
+        foreach($list as $item){
+            $data = [
+                'name' => $item->title,
+                'count' => $this->tasks_count_for_list($item->id)
+            ];
+
+            array_push($lists_array, $data);
+        }
+
+        $this->lists = $lists_array;
     }
 
     // Rename list
@@ -44,7 +59,7 @@ class ListManagement extends Component
 
         $list->update(['name' => $this->editingListName]);
 
-        $this->reset(['editingListId', 'editingListName']); 
+        $this->reset(['editingListId', 'editingListName']);
         $this->fetchLists();    // Refresh the list
         session()->flash('success', 'List renamed successfully.');
     }
@@ -58,7 +73,7 @@ class ListManagement extends Component
 
         $list->delete();
 
-        $this->fetchLists();    
+        $this->fetchLists();
         session()->flash('success', 'List deleted successfully.');
     }
 
@@ -70,11 +85,15 @@ class ListManagement extends Component
         return $list->tasks();
     }
 
+    public function tasks_count_for_list($list)
+    {
+        $list_count = ModelsListManagement::find($list)->tasks->count();
+        return $list_count;
+    }
+
     public function show_create_new_list_modal()
     {
         $this->dispatch("toggle-create-list-modal");
-        // $create_new_list = new CreateNewList();
-        // $create_new_list->toggle_create_list_modal();
     }
 
 }

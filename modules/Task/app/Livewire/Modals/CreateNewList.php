@@ -9,15 +9,15 @@ use Modules\Task\App\Models\ListManagement as ModelsListManagement;
 
 class CreateNewList extends Component
 {
-    public $title; 
+    public $title;
     public $show_modal;
     public $name;
-    
+
     public function mount()
     {
         $this->show_modal = false;
     }
-    
+
     public function render()
     {
         return view('task::livewire.modals.create-new-list');
@@ -30,19 +30,24 @@ class CreateNewList extends Component
     }
 
     // Create list
-    public function createList()
+    public function create_list()
     {
         $this->validate([
-            'name' => 'required|string|max:255|unique:lists,name,NULL,id,user_id,' . Auth::id(),
+            'name' => 'required|string|max:255|',
         ]);
+
 
         ModelsListManagement::create([
             'user_id' => Auth::id(),
-            'name' => $this->name,
+            'title' => $this->name
         ]);
 
-        $this->reset(['name']); 
+        // dd($this->name);
+
+        $this->reset(['name']);
+        $this->dispatch("refresh_list");
 
         $this->toggle_create_list_modal();
     }
 }
+ 
