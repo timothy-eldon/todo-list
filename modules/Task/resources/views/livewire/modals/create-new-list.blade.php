@@ -8,17 +8,17 @@
                 </button>
             </div>
             <div class="mt-2">
-                <form wire:submit.prevent='createList'>
-                    <input 
-                        type="text" 
+                <form wire:submit.prevent='create_list'>
+                    <input
+                        type="text"
                         wire:model='name'
-                        class="w-full bg-transparent border-0 ring-0 focus-within:ring-0 text-lg text-white placeholder:text-gray-200 font-bold" 
+                        class="w-full bg-transparent border-0 ring-0 focus-within:ring-0 text-lg text-white placeholder:text-gray-200 font-bold"
                         placeholder="Add a list title"
-                        wire:model='title'    
+                        wire:model='title'
                     />
                     <div class="flex justify-end">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="text-xs bg-teal px-4 py-2 rounded-full hover:bg-teal-light/50 transition"
                         >
                             Continue
