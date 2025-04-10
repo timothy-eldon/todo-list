@@ -4,6 +4,9 @@
     background: #357679;
     padding-top: 20px;
     /* position: fixed; */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 .sidebar a {
     padding: 10px 15px;

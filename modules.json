@@ -1,5 +1,6 @@
 {
     "Auth": true,
     "User": true,
-    "Task": true
+    "Task": true,
+    "Fresh": true
 }

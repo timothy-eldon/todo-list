@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('title')->unique()->nullable(true);
-            $table->text('description')->nullable();
-            $table->boolean('is_completed')->default(false);
-            $table->foreignId('list_id')->constrained('lists');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Links to users table
+            $table->string('name'); // List name
             $table->timestamps();
+            $table->unique(['user_id', 'name']); // Ensure unique list names per user
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('lists');
     }
 };
